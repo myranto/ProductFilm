@@ -111,7 +111,6 @@
                                             <th>Id Scene</th>
                                             <th>Nom du scene</th>
                                             <th>Date Debut du scene</th>
-                                            <th>Date Fin du scene</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -126,16 +125,11 @@
                                             <td><a style="text-decoration: none;color: #4d5154"
                                                    href="<%= request.getContextPath() %>/planning/<%= v.getIdscene() %>"><%= v.getDateDebut() %>
                                             </a></td>
-                                            <td><a style="text-decoration: none;color: #4d5154"
-                                                   href="<%= request.getContextPath() %>/planning/<%= v.getIdscene() %>"><%= v.getDateFin() %>
-                                            </a></td>
                                             <td><a class="btn btn-primary"
                                                    href="<%= request.getContextPath() %>/modify/<%= v.getIdscene() %>">Modifier</a>
                                             </td>
                                         </tr>
-
                                         <% } %>
-
                                         </tbody>
                                     </table>
                                 </div>

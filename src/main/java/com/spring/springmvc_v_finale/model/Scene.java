@@ -20,8 +20,6 @@ public class Scene extends ObjectBDD {
     private String nom;
     @KeyAnnotation
     private Timestamp dateDebut;
-    @KeyAnnotation
-    private Timestamp dateFin;
 
     public Scene() {
     }
@@ -33,14 +31,12 @@ public class Scene extends ObjectBDD {
     public Scene(String nom, Timestamp dateDebut, Timestamp dateFin) {
         this.nom = nom;
         this.dateDebut = dateDebut;
-        this.dateFin = dateFin;
     }
 
     public Scene(int idscene, String nom, Timestamp dateDebut, Timestamp dateFin) {
         this.idscene = idscene;
         this.nom = nom;
         this.dateDebut = dateDebut;
-        this.dateFin = dateFin;
     }
 
     public int getIdscene() {
@@ -67,16 +63,9 @@ public class Scene extends ObjectBDD {
         this.dateDebut = dateDebut;
     }
 
-    public Timestamp getDateFin() {
-        return dateFin;
-    }
 
-    public void setDateFin(Timestamp dateFin) {
-        this.dateFin = dateFin;
-    }
-
-    public void save() throws Exception {
-        super.saveAll(Connexion.getConnection());
+    public Scene save() throws Exception {
+       return super.saveAll(Connexion.getConnection());
     }
     public ArrayList<Scene> SelectAll() throws Exception {
         return super.SelectAll(Connexion.getConnection());
@@ -87,24 +76,24 @@ public class Scene extends ObjectBDD {
     public void updateById() throws Exception {
         super.updateById(Connexion.getConnection());
     }
-    public ArrayList<Date> getMiddleDate() throws Exception {
-        ArrayList<Date> list = new ArrayList<>();
-        Date debut = new Date(getDateDebut().getTime());
-        Date debutfin =new Date(getDateFin().getTime());
-        long startMillis = debut.getTime();
-        long endMillis = debutfin.getTime();
-        for (long millis = startMillis; millis <= endMillis; millis += 86400000) {
-            // Add 1 day in milliseconds (86400000 = 24 hours * 60 minutes * 60 seconds * 1000 milliseconds)
-            Date date = new Date(millis);
-            list.add(date);
-        }
-        if (endMillis % 86400000 == 0) {
-            Date lastDay = new Date(endMillis);
-            list.add(lastDay);
-        }
-
-        return list;
-    }
+//    public ArrayList<Date> getMiddleDate() throws Exception {
+//        ArrayList<Date> list = new ArrayList<>();
+//        Date debut = new Date(getDateDebut().getTime());
+////        Date debutfin =new Date(getDateFin().getTime());
+//        long startMillis = debut.getTime();
+//        long endMillis = debutfin.getTime();
+//        for (long millis = startMillis; millis <= endMillis; millis += 86400000) {
+//            // Add 1 day in milliseconds (86400000 = 24 hours * 60 minutes * 60 seconds * 1000 milliseconds)
+//            Date date = new Date(millis);
+//            list.add(date);
+//        }
+//        if (endMillis % 86400000 == 0) {
+//            Date lastDay = new Date(endMillis);
+//            list.add(lastDay);
+//        }
+//
+//        return list;
+//    }
     public ArrayList<Scene> SelectAllByQuerry(String sql) throws Exception {
         return SelectAllByQuery(Connexion.getConnection(),sql);
     }

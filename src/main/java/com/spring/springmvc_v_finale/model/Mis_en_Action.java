@@ -18,12 +18,8 @@ public class Mis_en_Action extends ObjectBDD {
     @KeyAnnotation
     private int idperso;
 
-    @KeyAnnotation
-    private int idplateau;
     @ForeignKeyAnnotation(name = "idperso",references = "idperso")
     private Personnage perso;
-    @ForeignKeyAnnotation(name = "idplateau",references = "idplateau")
-    private Plateau plate;
 
     public Personnage getPerso() {
         return perso;
@@ -33,26 +29,16 @@ public class Mis_en_Action extends ObjectBDD {
         this.perso = perso;
     }
 
-    public Plateau getPlate() {
-        return plate;
-    }
-
-    public void setPlate(Plateau plate) {
-        this.plate = plate;
-    }
-
     public Mis_en_Action() {
     }
 
-    public Mis_en_Action(int idperso, int idplateau) {
+    public Mis_en_Action(int idperso) {
         this.idperso = idperso;
-        this.idplateau = idplateau;
     }
 
-    public Mis_en_Action(int idaction, int idperso, int idplateau) {
+    public Mis_en_Action(int idaction, int idperso) {
         this.idaction = idaction;
         this.idperso = idperso;
-        this.idplateau = idplateau;
     }
 
     public int getIdaction() {
@@ -71,18 +57,11 @@ public class Mis_en_Action extends ObjectBDD {
         this.idperso = idperso;
     }
 
-    public int getIdplateau() {
-        return idplateau;
+    public Mis_en_Action save(Connection con) throws Exception {
+       return super.save(con);
     }
-
-    public void setIdplateau(int idplateau) {
-        this.idplateau = idplateau;
-    }
-    public void save(Connection con) throws SQLException, InvocationTargetException, NoSuchMethodException, IllegalAccessException {
-        super.save(con);
-    }
-    public void save() throws Exception {
-        super.saveAll(Connexion.getConnection());
+    public Mis_en_Action save() throws Exception {
+       return super.saveAll(Connexion.getConnection());
     }
     public ArrayList<Mis_en_Action> SelectAll() throws Exception {
         return super.SelectAll(Connexion.getConnection());

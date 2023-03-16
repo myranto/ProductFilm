@@ -44,8 +44,8 @@ public class Photos extends ObjectBDD {
     public void setImage(String image) {
         this.image = image;
     }
-    public void save(Connection con) throws SQLException, InvocationTargetException, NoSuchMethodException, IllegalAccessException {
-        super.save(con);
+    public Photos save(Connection con) throws Exception {
+       return super.save(con);
     }
     public void save() throws Exception {
         super.saveAll(Connexion.getConnection());

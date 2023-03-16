@@ -19,14 +19,64 @@ public class Action extends ObjectBDD {
     @KeyAnnotation
     private int idscene;
     @KeyAnnotation
-    private Timestamp dateAction;
+    private int dateAction;
     @KeyAnnotation
     private String description;
     @KeyAnnotation
     private int finished = 0;
 
+    @KeyAnnotation
+    private int idplateau;
+    @KeyAnnotation
+    private int isValidate=0;
+
+    public int getIsValidate() {
+        return isValidate;
+    }
+
+    public void setIsValidate(int isValidate) {
+        this.isValidate = isValidate;
+    }
+
     @ForeignKeyAnnotation(name = "idscene",references = "idscene")
     private Scene scene;
+
+    @ForeignKeyAnnotation(name = "idplateau",references = "idplateau")
+    Plateau plateau;
+
+    public Plateau getPlateau() {
+        return plateau;
+    }
+
+    public void setPlateau(Plateau plateau) {
+        this.plateau = plateau;
+    }
+
+    public int getIdplateau() {
+        return idplateau;
+    }
+
+    public Action(int idaction, int idscene, int dateAction, String description, int finished, int idplateau) {
+        this.idaction = idaction;
+        this.idscene = idscene;
+        this.dateAction = dateAction;
+        this.description = description;
+        this.finished = finished;
+        this.idplateau = idplateau;
+    }
+
+    public Action(int idscene, int dateAction, String description, int finished, int idplateau) {
+        this.idscene = idscene;
+        this.dateAction = dateAction;
+        this.description = description;
+        this.finished = finished;
+        this.idplateau = idplateau;
+    }
+
+    public void setIdplateau(int idplateau) {
+        this.idplateau = idplateau;
+    }
+
     private ArrayList<Mis_en_Action> mis_en_actions = null;
 
     public ArrayList<Mis_en_Action> getMis_en_actions() throws Exception {
@@ -80,12 +130,12 @@ public class Action extends ObjectBDD {
 
     public Action() {
     }
-    public Action(int idscene, Timestamp dateAction, String description) {
+    public Action(int idscene, int dateAction, String description) {
         this.idscene = idscene;
         this.dateAction = dateAction;
         this.description = description;
     }
-    public Action(int idscene, Timestamp dateAction, String description,int finished) {
+    public Action(int idscene, int dateAction, String description,int finished) {
         this.idscene = idscene;
         this.dateAction = dateAction;
         this.description = description;
@@ -99,7 +149,7 @@ public class Action extends ObjectBDD {
         String sql = "select * from "+getNomTable()+" where idscene="+scenes;
         return SelectAllByQuery(Connexion.getConnection(),sql);
     }
-    public Action(int idaction, int idscene, Timestamp dateAction, String description,int finished) {
+    public Action(int idaction, int idscene, int dateAction, String description,int finished) {
         this.idaction = idaction;
         this.idscene = idscene;
         this.dateAction = dateAction;
@@ -123,11 +173,11 @@ public class Action extends ObjectBDD {
         this.idscene = idscene;
     }
 
-    public Timestamp getDateAction() {
+    public int getDateAction() {
         return dateAction;
     }
 
-    public void setDateAction(Timestamp dateAction) {
+    public void setDateAction(int dateAction) {
         this.dateAction = dateAction;
     }
 
@@ -142,17 +192,17 @@ public class Action extends ObjectBDD {
 //            Connection con = Connexion.getConnection();
         try {
 //            con.setAutoCommit(false);
-            super.saveAll(Connexion.getConnection());
-            Action act = findlast(Connexion.getConnection());
+            Action act =  super.saveAll(Connexion.getConnection());
+//            Action act = findlast(Connexion.getConnection());
             for (Mis_en_Action m:getList_mise_action()) {
                 m.setIdaction(act.getIdaction());
 //                m.save(con);
-                m.save();
+                m.saveAll(Connexion.getConnection());
             }
             for (Photos f:getList_photo()) {
                 f.setIdaction(act.getIdaction());
 //                f.save(con);
-                f.save();
+                f.saveAll(Connexion.getConnection());
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -166,9 +216,14 @@ public class Action extends ObjectBDD {
     public ArrayList<Action> SelectAllByQuerry(String sql) throws Exception {
         return SelectAllByQuery(Connexion.getConnection(),sql);
     }
+    public ArrayList<Action> SelectAllActionNonValidate() throws Exception {
+        String sql= "select * from "+getNomTable()+" where isvalidate=0 order by idaction asc";
+        return SelectAllByQuerry(sql);
+    }
     public Action findById() throws Exception {
         return super.findById(Connexion.getConnection(),String.valueOf(getIdaction()));
     }
+
     public boolean testAction(String valeur)throws Exception{
         String sql="select * from action where lower(description) like lower('%"+valeur+"%')";
         ArrayList<Action> liste=this.SelectAllByQuerry( sql);

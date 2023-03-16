@@ -88,4 +88,5 @@ public class Notification extends ObjectBDD {
     public void setIdaction(int idaction) {
         this.idaction = idaction;
     }
+
 }

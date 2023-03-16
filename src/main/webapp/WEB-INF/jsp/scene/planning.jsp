@@ -88,26 +88,28 @@
                                     <span class="close">&times;</span>
                                     <form class="form-control" action="<%= request.getContextPath() %>/validate_action/<%= scene %>"
                                           method="post">
-                                        <p>
-                                            jour action
-                                        <div class="mb-3">
-                                        <select id="date" class="form-control" name="dateAction" >
-                                            <% for (Date d : list_date) { %>
-                                            <option value="<%= d %>"> <%= d.getDate() + " " + Month.of(d.getMonth() + 1) %></option>
-<%--                                            <div class="form-check">--%>
-<%--                                                <input class="form-check-input" type="radio" value="<%= d %>"--%>
-<%--                                                       name="dateAction">--%>
-<%--                                                <label class="form-check-label">--%>
-<%--                                                    <%= d.getDate() + " " + Month.of(d.getMonth() + 1) %>--%>
-<%--                                                </label>--%>
-<%--                                            </div>--%>
-                                            <%--                                        </option>--%>
-                                            <% } %>
-                                        </select>
-                                        </div>
-                                        <label for="date">fin</label>
-                                        <input class="form-control" type="time" required name="fin">
-                                        </p>
+<%--                                        <p>--%>
+<%--                                            jour action--%>
+<%--                                        <div class="mb-3">--%>
+<%--                                        <select id="date" class="form-control" name="dateAction" >--%>
+<%--                                            <% for (Date d : list_date) { %>--%>
+<%--                                            <option value="<%= d %>"> <%= d.getDate() + " " + Month.of(d.getMonth() + 1) %></option>--%>
+<%--&lt;%&ndash;                                            <div class="form-check">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                                <input class="form-check-input" type="radio" value="<%= d %>"&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                                       name="dateAction">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                                <label class="form-check-label">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                                    <%= d.getDate() + " " + Month.of(d.getMonth() + 1) %>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                                </label>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                            </div>&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                        </option>&ndash;%&gt;--%>
+<%--                                            <% } %>--%>
+<%--                                        </select>--%>
+<%--                                        </div>--%>
+<%--                                        <label for="date">fin</label>--%>
+<%--                                        <input class="form-control" type="time" required name="fin">--%>
+<%--                                        </p>--%>
+
+                                      <p>duree:  <input class="form-control" type="number" min="1" required name="dure"></p>
                                         <input class="form-control" type="file" class="form-control" id="selectImage" name="images">
                                         <input type="hidden" name="image" id="imageCode">
                                         <p>Description : <textarea class="form-control" name="description" rows="3" cols="40"
@@ -147,24 +149,25 @@
                                        <% } %>
                                     </div>
                                     <div class="card-body">
-                <span class="tag tag-teal">jour: <%= act.getDateAction().getDate() + " " + Month.of(act.getDateAction().getMonth() + 1) %>
+                <span class="tag tag-teal">dure: <%= act.getDateAction() %>
+<%--                <span class="tag tag-teal">jour: <%= act.getDateAction().getDate() + " " + Month.of(act.getDateAction().getMonth() + 1) %>--%>
                 </span>
                                         <h4>Personnage :
                                             <% for (Mis_en_Action m : act.getMis_en_actions()) { %>
                                             <%= m.getPerso().getNomperso() %> ,
                                             <% } %>
                                         </h4>
-                                        <p>Plateau :
-                                            <% for (Mis_en_Action m : act.getMis_en_actions()) { %>
-                                            <%= m.getPlate().getNomplateau() %> ,
-                                            <% } %>
-                                        </p>
+<%--                                        <p>Plateau :--%>
+<%--                                            <% for (Mis_en_Action m : act.getMis_en_actions()) { %>--%>
+<%--                                            <%= m.getPlate().getNomplateau() %> ,--%>
+<%--                                            <% } %>--%>
+<%--                                        </p>--%>
                                         <p>Description : <%= act.getDescription() %>
                                         </p>
                                         <div class="user">
                                             <div class="user-info">
-                                                <h5>heure fin action: <small><%= String.valueOf(new Time(act.getDateAction().getTime())) %>
-                                                </small></h5>
+<%--                                                <h5>heure fin action: <small><%= String.valueOf(new Time(act.getDateAction().getTime())) %>--%>
+<%--                                                </small></h5>--%>
                                                 <% if (act.getFinished()==0) {%>
                                                 <h3>
                                                     <small class="even-row-color" style="color: red">non fini</small>
@@ -226,11 +229,9 @@
         return new Promise((resolve, reject) => {
             const fileReader = new FileReader();
             fileReader.readAsDataURL(file);
-
             fileReader.onload = () => {
                 resolve(fileReader.result);
             };
-
             fileReader.onerror = (error) => {
                 reject(error);
             };

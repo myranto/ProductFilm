@@ -29,6 +29,7 @@
     <li> <a href="<%= request.getContextPath() %>/create_scene">ajout scene</a></li>
     <li> <a href="<%= request.getContextPath() %>/list_scene">Liste scene</a></li>
     <li> <a href="<%= request.getContextPath() %>/alert">notifications</a></li>
+    <li> <a href="<%= request.getContextPath() %>/plateau">list plateau</a></li>
   </ul>
 </div>
 </body>

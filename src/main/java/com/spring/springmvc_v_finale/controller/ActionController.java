@@ -19,7 +19,7 @@ public class ActionController {
         ModelAndView mod = new ModelAndView("action/add_action");
         Scene scene = new Scene(idscene);
         scene = scene.findById();
-        mod.addObject("list_date",scene.getMiddleDate());
+//        mod.addObject("list_date",scene.getMiddleDate());
         mod.addObject("scene",idscene);
         mod.addObject("person",new Personnage().SelectAll());
         mod.addObject("plateau",new Plateau().SelectAll());
@@ -29,19 +29,22 @@ public class ActionController {
 //    validate ajout action
     @PostMapping("/validate_action/{idscene}")
     public ModelAndView validate_action(@PathVariable("idscene") int idscene, HttpServletRequest req) throws Exception {
-        String dateAction = req.getParameter("dateAction");
+//        String dateAction = req.getParameter("dateAction");
         String[] image = req.getParameterValues("image");
-        String fin = req.getParameter("fin");
-        String d = dateAction+" "+fin+":00";
-        System.out.println(d);
-        Timestamp datefin = Timestamp.valueOf(d);
+//        String fin = req.getParameter("fin");
+//        String d = dateAction+" "+fin+":00";
+//        System.out.println(d);
+//        Timestamp datefin = Timestamp.valueOf(d);
+        int dure = Integer.parseInt(req.getParameter("dure"));
         String description = req.getParameter("description");
         int plateau = Integer.parseInt(req.getParameter("plateau"));
         String[] person = req.getParameterValues("person");
-        Action act = new Action(idscene,datefin,description);
+        Action act = new Action(idscene,dure,description);
+        act.setIdplateau(plateau);
         for (int i = 0; i < person.length; i++) {
                 try {
-                    Mis_en_Action m = new Mis_en_Action(Integer.parseInt(person[i]),plateau);
+//                    Mis_en_Action m = new Mis_en_Action(Integer.parseInt(person[i]),plateau);
+                    Mis_en_Action m = new Mis_en_Action(Integer.parseInt(person[i]));
                     act.getList_mise_action().add(m);
                 }catch (Exception e){e.printStackTrace();}
         }
@@ -71,7 +74,7 @@ public class ActionController {
         mod.addObject("plan",new Action().findByScene(idscene));
         Scene scenes = new Scene(idscene);
         scenes = scenes.findById();
-        mod.addObject("list_date",scenes.getMiddleDate());
+//        mod.addObject("list_date",scenes.getMiddleDate());
         mod.addObject("scene",idscene);
         mod.addObject("person",new Personnage().SelectAll());
         mod.addObject("plateau",new Plateau().SelectAll());

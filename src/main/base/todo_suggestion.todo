@@ -1,0 +1,43 @@
+-olona manana dure d'insdisponibility
+-plateau koa manana dure d'indisponibiliy
+
+manana table :
+    -validation planning
+    -calendar -idaction
+    -scene
+    -action
+    -plateau :
+        -debut indisponibilite
+        -fin indisponibilite
+    -person :
+        -debut indisponibilite
+        -fin indisponibilite
+1 jour = 8h
+action ray manana duree
+
+**planning ray zany tsy mahazo mihoatra ny 8h
+**tsy miasa ny samedi sy dimanche
+
+
+scenario :
+    -manana liste ana action zaho
+2 cas :
+    .raha mifidy action au debut dia mijery ny disponibilite an'iny plateau iny
+    .raha tsy mifidy dia :
+        -mijery ny plateau ray zay disponible ao fotsiny
+        -sinon mijery anle plateau ze libre voloany
+    -Attribution des dates :
+        .manao somme des duree action de si dure mihoatra ny 8H de miova date
+base function :
+    mila function mireturn table
+--metier
+    mila classe suggestion
+    function maka ny action rehetra zay isvalidate = 0 --check
+    function maka ny plateau an'le action           --check
+    function maka ny scene aproprier amle action(date debut sy datefin)     --check
+    function manam-boatra anle suggestion :
+        .eo am voloany dia lay if debut et fin indispo plateau =null then maka anle debut anle scene de ny fin = debut+dure action
+        else debut = finIndisponibilite + 1 min
+    function mijery andro :
+        calcul hoe feno 8 heures ve if true then day+1 else continue
+

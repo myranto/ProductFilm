@@ -8,7 +8,9 @@ import com.spring.springmvc_v_finale.utils.inter.TableAnnotation;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 @TableAnnotation
@@ -18,8 +20,45 @@ public class Plateau extends ObjectBDD {
     private int idplateau;
     @KeyAnnotation
     private String nomplateau;
+    @KeyAnnotation
+    private Timestamp dateDebutIndisponibilite;
+    @KeyAnnotation
+    private Timestamp dateFinIndisponibile;
+
+    public Plateau(Timestamp dateFinIndisponibile) {
+        this.dateFinIndisponibile = dateFinIndisponibile;
+    }
+
+    public Timestamp getDateDebutIndisponibilite() {
+        return dateDebutIndisponibilite;
+    }
+
+    public void setDateDebutIndisponibilite(Timestamp dateDebutIndisponibilite) {
+        this.dateDebutIndisponibilite = dateDebutIndisponibilite;
+    }
+
+    public Timestamp getDateFinIndisponibile() {
+        return dateFinIndisponibile;
+    }
+
+    public void setDateFinIndisponibile(Timestamp dateFinIndisponibile) {
+        this.dateFinIndisponibile = dateFinIndisponibile;
+    }
 
     public Plateau() {
+    }
+
+    public Plateau(int idplateau, String nomplateau, Timestamp dateDebutIndisponibilite, Timestamp dateFinIndisponibile) {
+        this.idplateau = idplateau;
+        this.nomplateau = nomplateau;
+        this.dateDebutIndisponibilite = dateDebutIndisponibilite;
+        this.dateFinIndisponibile = dateFinIndisponibile;
+    }
+
+    public Plateau(String nomplateau, Timestamp dateDebutIndisponibilite, Timestamp dateFinIndisponibile) {
+        this.nomplateau = nomplateau;
+        this.dateDebutIndisponibilite = dateDebutIndisponibilite;
+        this.dateFinIndisponibile = dateFinIndisponibile;
     }
 
     public Plateau(String nomplateau) {
@@ -51,8 +90,14 @@ public class Plateau extends ObjectBDD {
     public void save() throws Exception {
         super.saveAll(Connexion.getConnection());
     }
+    public Plateau findById() throws Exception {
+        return super.findById(Connexion.getConnection(),String.valueOf(getIdplateau()));
+    }
     public ArrayList<Plateau> SelectAll() throws Exception {
         return super.SelectAll(Connexion.getConnection());
+    }
+    public void Update() throws Exception {
+        super.updateById(Connexion.getConnection());
     }
     public ArrayList<Plateau> SelectAllByQuerry(String sql) throws Exception {
         return SelectAllByQuery(Connexion.getConnection(),sql);

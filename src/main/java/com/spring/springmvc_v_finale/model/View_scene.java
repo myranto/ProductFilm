@@ -163,11 +163,9 @@ public class View_scene extends ObjectBDD{
         return this.Recherch(sql);
     }
     public static void main (String [] args)throws Exception{
-        View_scene scene=new View_scene();
-        ArrayList<View_scene> liste=scene.Recherche("Plateau 1 isaia ", null, null);
-        for(int i=0;i<liste.size();i++){
-            System.out.println(liste.get(i).getNom());
-        }
+        Action act = new Action();
+        act.setDescription("myra");
+        ArrayList<Action> l = act.search(Connexion.getConnection());
     }
 
 }

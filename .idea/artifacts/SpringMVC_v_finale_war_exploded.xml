@@ -33,8 +33,6 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:5.3.23" />
           <element id="library" level="project" name="Maven: commons-dbcp:commons-dbcp:1.4" />
           <element id="library" level="project" name="Maven: commons-pool:commons-pool:1.5.4" />
-          <element id="library" level="project" name="Maven: org.postgresql:postgresql:42.5.1" />
-          <element id="library" level="project" name="Maven: org.checkerframework:checker-qual:3.5.0" />
         </element>
       </element>
       <element id="directory" name="META-INF">

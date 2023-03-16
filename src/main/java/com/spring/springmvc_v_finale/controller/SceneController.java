@@ -85,7 +85,8 @@ public class SceneController {
 //        ModelAndView mod = new ModelAndView("scene/ajout_scene");
 
         Scene scene = getScene(req,0);
-        scene.save();
+       scene = scene.save();
+        System.out.println(scene.getNom()+" id:"+scene.getIdscene());
 //        mod.addObject("mess","success lesy");
         return ToList(req);
     }

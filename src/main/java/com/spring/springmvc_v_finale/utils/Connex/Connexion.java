@@ -20,5 +20,6 @@ public class Connexion {
     }
     public static void main(String[] args) throws Exception {
         System.out.println(Connexion.getConnection());
+
     }
 }
